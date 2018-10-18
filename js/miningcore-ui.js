@@ -1,5 +1,5 @@
 // config
-var API = 'https://excc.scecf.org/api/'; // API address
+var API = ''; // API address
 var defaultPool = ''; // Default Pool ID
 
 var currentPool = defaultPool;
