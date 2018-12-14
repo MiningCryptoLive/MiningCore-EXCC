@@ -81,8 +81,8 @@ function loadStatsData() {
                     //$('#poolShares').text(_formatter(value, 0, ''));
                     //$('#poolBlocks').text(_formatter(value, 0, ''));
                     $('#poolMiners').text(_formatter(value.poolStats.connectedMiners, 0, ''));
-                    $('#poolHashRate').text(_formatter(value.poolStats.poolHashrate, 5, 'H/s'));
-                    $('#networkHashRate').text(_formatter(value.networkStats.networkHashrate, 5, 'H/s'));
+                    $('#poolHashRate').text(_formatter(value.poolStats.poolHashrate, 5, 'Sol/s'));
+                    $('#networkHashRate').text(_formatter(value.networkStats.networkHashrate, 5, 'Sol/s'));
                     $('#networkDifficulty').text(_formatter(value.networkStats.networkDifficulty, 5, ''));
                     $('#minimumPayment').text(_formatter(value.paymentProcessing.minimumPayment, 5, 'EXCC'));
                     $('#payoutScheme').text(value.paymentProcessing.payoutScheme);
@@ -193,7 +193,7 @@ function loadDashboardData(walletAddress) {
             $.each(data.performance.workers, function (index, value) {
                 workerHashRate += value.hashrate;
             });
-            $('#minerHashRate').text(_formatter(workerHashRate, 5, 'H/s'));
+            $('#minerHashRate').text(_formatter(workerHashRate, 5, 'Sol/s'));
             $('#pendingBalance').text(_formatter(data.pendingBalance, 5, 'EXCC'));
             $('#paidBalance').text(_formatter(data.totalPaid, 5, 'EXCC'));
             $('#lifetimeBalance').text(_formatter(data.pendingBalance + data.totalPaid, 5, ''));
@@ -219,7 +219,7 @@ function loadDashboardWorkerList(walletAddress) {
                     } else {
                         workerList += '<td>' + index + '</td>';
                     }
-                    workerList += '<td>' + _formatter(value.hashrate, 5, 'H/s') + '</td>';
+                    workerList += '<td>' + _formatter(value.hashrate, 5, 'Sol/s') + '</td>';
                     workerList += '<td>' + _formatter(value.sharesPerSecond, 5, 'S/s') + '</td>';
                     workerList += '</tr>';
                 });
@@ -308,7 +308,7 @@ function loadMinersList() {
                     minerList += '<tr>';
                     minerList += '<td>' + value.miner.substring(0, 12) + ' &hellip; ' + value.miner.substring(value.miner.length - 12) + '</td>';
                     //minerList += '<td><a href="' + value.minerAddressInfoLink + '" target="_blank">' + value.miner.substring(0, 12) + ' &hellip; ' + value.miner.substring(value.miner.length - 12) + '</td>';
-                    minerList += '<td>' + _formatter(value.hashrate, 5, 'H/s') + '</td>';
+                    minerList += '<td>' + _formatter(value.hashrate, 5, 'Sol/s') + '</td>';
                     minerList += '<td>' + _formatter(value.sharesPerSecond, 5, 'S/s') + '</td>';
                     minerList += '</tr>';
                 });
