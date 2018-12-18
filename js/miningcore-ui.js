@@ -212,7 +212,7 @@ function loadDashboardWorkerList(walletAddress) {
         .done(function (data) {
             var workerList = '<thead><th>Name</th><th>Hash Rate</th><th>Share Rate</th></thead><tbody>';
             if (data.length > 0) {
-                $.each(data[0].workers, function (index, value) {
+                $.each(data[data.length-1].workers, function (index, value) {
                     workerList += '<tr>';
                     if (index.length === 0) {
                         workerList += '<td>Unnamed</td>';
