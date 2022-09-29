@@ -1,6 +1,6 @@
 // config
-var API = ''; // API address
-var defaultPool = ''; // Default Pool ID
+var API = '{{API_URL}}'; // API address
+var defaultPool = '{{DEFAULT_POOL}}'; // Default Pool ID
 
 var currentPool = defaultPool;
 
