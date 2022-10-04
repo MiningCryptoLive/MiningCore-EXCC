@@ -190,7 +190,7 @@ function loadDashboardData(walletAddress) {
         .done(function (data) {
             $('#pendingShares').text(_formatter(data.pendingShares, 0, ''));
             var workerHashRate = 0;
-            $.each(data.performance.workers, function (index, value) {
+            $.each(data.performanceSamples.workers, function (index, value) {
                 workerHashRate += value.hashrate;
             });
             $('#minerHashRate').text(_formatter(workerHashRate, 5, 'Sol/s'));
