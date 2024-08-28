@@ -1,6 +1,6 @@
 // config
-var API = '{{API_URL}}'; // API address
-var defaultPool = '{{DEFAULT_POOL}}'; // Default Pool ID
+var API = 'http://doge.solopool.us'; // API address
+var defaultPool = 'dogecoin'; // Default Pool ID
 
 var currentPool = defaultPool;
 
@@ -76,18 +76,32 @@ function loadPools(renderCallback) {
 function loadStatsData() {
     return $.ajax(API + 'pools')
         .done(function (data) {
-            $.each(data.pools, function (index, value) {
-                if (currentPool === value.id) {
-                    //$('#poolShares').text(_formatter(value, 0, ''));
-                    //$('#poolBlocks').text(_formatter(value, 0, ''));
-                    $('#poolMiners').text(_formatter(value.poolStats.connectedMiners, 0, ''));
-                    $('#poolHashRate').text(_formatter(value.poolStats.poolHashrate, 5, 'Sol/s'));
-                    $('#networkHashRate').text(_formatter(value.networkStats.networkHashrate, 5, 'Sol/s'));
-                    $('#networkDifficulty').text(_formatter(value.networkStats.networkDifficulty, 5, ''));
-                    $('#minimumPayment').text(_formatter(value.paymentProcessing.minimumPayment, 5, 'EXCC'));
-                    $('#payoutScheme').text(value.paymentProcessing.payoutScheme);
-                    $('#poolFee').text(_formatter(value.poolFeePercent, 2, '%'));
-                    $('#poolAlgo').text(value.coin.algorithm);
+            $.each(data.pools, function(index, value) {
+		if (currentPool === value.id) {
+		var PoolisOfPercent = ((value.poolStats.poolHashrate / value.networkStats.networkHashrate) * 100);    	
+		var roundEffort = (value.poolEffort * 100).toFixed(2);
+		$("#coinName").text(value.coin.name);
+		$("#coinAlgo").text(value.coin.algorithm);
+		$("#blockchainHeight").text(value.networkStats.blockHeight);
+		$("#connectedPeers").text(value.networkStats.connectedPeers);
+		$("#minimumPayment").text(value.paymentProcessing.minimumPayment + " " + value.coin.type);
+		$("#payoutScheme").text(value.paymentProcessing.payoutScheme);
+		$("#rewardType").text(value.networkStats.rewardType);
+		$("#poolFeePercent").text(value.poolFeePercent + " %");
+		$("#poolHashRate").text(_formatter(value.poolStats.poolHashrate, 5, "H/s"));
+		$("#poolMiners").text(value.poolStats.connectedMiners + " Miner(s)");
+		$("#poolWorkers").text(value.poolStats.connectedWorkers + " Worker(s)");
+		$("#networkHashRate").text(_formatter(value.networkStats.networkHashrate, 3, "H/s"));
+		$("#networkDifficulty").text(_formatter(value.networkStats.networkDifficulty, 3, "H/s"));
+		$("#lastNetworkBlock").text(dateConvertor(value.networkStats.lastNetworkBlockTime));
+		$("#blockConfirmations").text(value.paymentProcessing.minimumConfirmations);
+		$("#poolPercentofNetwork").text(PoolisOfPercent.toFixed(3) + " %");
+		$("#poolEstimatedBlocks").text((PoolisOfPercent * 720 / 100).toFixed(4));
+		$("#totalPaid").text(_formatter(value.totalPaid, 2,""));
+		$("#sharesPerSecond").text(_formatter(value.poolStats.sharesPerSecond, 5, 'H/s'));
+		$("#poolBlocks").text(value.totalBlocks);
+		$("#lastPoolBlock").text(dateConvertor(value.lastPoolBlockTime));
+		$("#poolEffort").text(roundEffort + "%");
                 }
             });
         })
